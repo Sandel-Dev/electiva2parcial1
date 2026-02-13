@@ -3,7 +3,7 @@ name: Deploy to Surge
 on:
   push:
     branches:
-      - main  # o la rama principal que uses
+      - main  
 
 jobs:
   deploy:
@@ -26,4 +26,4 @@ jobs:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
         run: |
           echo $SURGE_TOKEN | surge login --token
-          surge ./ index-tu-sitio.surge.sh --project ./ --domain index-tu-sitio.surge.sh
+          surge ./ index-sandelarache202310700.surge.sh --project ./ --domain index-sandelarache202310700.surge.sh
