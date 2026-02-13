@@ -1,0 +1,29 @@
+name: Deploy to Surge
+
+on:
+  push:
+    branches:
+      - main  # o la rama principal que uses
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Surge
+        run: npm install --global surge
+
+      - name: Deploy to Surge
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        run: |
+          echo $SURGE_TOKEN | surge login --token
+          surge ./ index-tu-sitio.surge.sh --project ./ --domain index-tu-sitio.surge.sh
